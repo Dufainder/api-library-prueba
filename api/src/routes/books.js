@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const express = require('express')
 const router = express.Router()
 const axios = require('axios');
@@ -22,8 +23,8 @@ const getDBInfo = async () => {
                 }
             })
             let response = await dataDB;
-            console.log(response, "Lo que devuelve BD")
-            if(dataDB){
+            if(response.length !==0){
+                console.log("entra a ifdataDB")
                 dataDB.map(book => {
                          return {
                              id: book.id,
@@ -42,15 +43,14 @@ const getDBInfo = async () => {
 
             else{
                  
-                const resAxios = await axios.get(`${LibrosURL}`);
-                console.log(results, "resAxios")
-                const { results } = resAxios.data ;
-                console.log(results, "funcion getApiInfo")
-                return response;
+                 const resAxios = await axios.get(`${LibrosURL}`);
+               // const { results } = resAxios.data ;
+                 const  results  = resAxios.data
+                 return results ;
             }
             
         }catch (error) {
-          console.error(error);
+          console.error(error, "error");
         }
     }
 
@@ -70,6 +70,7 @@ router.get('/', async (req, res) => {
         //     console.log("Error")
         //     res.status(404).json([{ name: 'Error'}])
         // }
+        console.log("Ingreso a Name")
 
     }else{
        // para no confundir a home, si no hay un name de busqueda muestra toda la info.
@@ -82,3 +83,5 @@ router.get('/', async (req, res) => {
 
     }
 });
+
+module.exports = router
