@@ -5,9 +5,20 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('admin', {
  
-      user_name: {
+      name: {
         type: DataTypes.STRING,
       },
+      
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      
+      identification:{
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+
       
   })
 }

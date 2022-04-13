@@ -13,6 +13,16 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      
+      identification:{
+        type: DataTypes.FLOAT,
+        allowNull: false,
+      },
+
+      admin:{
+        type: DataTypes.BOOLEAN,
+    
+      }
 
   })
 }

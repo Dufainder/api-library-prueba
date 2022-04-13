@@ -3,8 +3,63 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios');
 require('dotenv').config();
-const { Book, Category, Op } = require('../db');
+const { Book, Category, Admin, Op } = require('../db');
 const {LibrosURL,CategoriesURL, otherCategoriesURL} = process.env;
+
+
+
+
+
+
+const loadAdmin = async () => {
+
+    try{
+     
+     const admins = [
+      { 
+          name:"Dufainder",
+          last_name:"Bedoya",
+          identification:1216718134,
+          
+      } ,{
+
+          name:"Camilo",
+          last_name:"Montoya",
+          identification:123456789,
+
+     }]
+
+     admins.map(async (admin) =>{
+
+         let AdminCreate = await Admin.create({ 
+             
+             name: admin.name,
+             last_name: admin.last_name,
+             identification: admin.identification,
+
+            })
+
+            await AdminCreate.save();
+        });
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const ValidarAdmin = async () =>{
+
+    try{
+                
+        const dataAdminDB =  await Admin.findAll();
+        return dataAdminDB;
+
+    }catch(error){
+              
+       console.log(error, "error")
+    }
+} 
+
 
 
 const validacionCategory = async()=>{
@@ -126,13 +181,20 @@ const getDBInfo = async () => {
            
             let a =false;
             let b=false;
-          
+
+            const adminDB = await ValidarAdmin();
+            let responseAdmin = await adminDB;
+
             const bookDB = await validacionBook(); 
             let responseBook = await bookDB 
             
             const dataCategoryDB =  await validacionCategory();
             let responseCategory = await dataCategoryDB;
           
+            if(responseAdmin.length === 0){
+                loadAdmin();
+                
+            }
             
             if(responseCategory.length === 0){
                 loadCategoryInDB();
