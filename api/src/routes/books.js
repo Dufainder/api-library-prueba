@@ -1,53 +1,45 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const express = require('express')
 const router = express.Router()
-const axios = require('axios');
 require('dotenv').config();
 const { Book, Category, Op } = require('../db');
-const {LibrosURL} = process.env;
+
 
 //!                   1
 
 
 //!                   2
 
+
+const validacionBook = async()=>{
+   
+    try{
+        const dataBookDB =  await Book.findAll({ 
+            include:{
+                model: Category,
+                attributes: ['name'],
+                through:{
+                    attributes: []
+                }
+            }
+        })
+        
+        return await dataBookDB;
+
+     }catch (error) {
+        console.error(error, "error");
+     }
+  };
+
+
 const getDBInfo = async () => {
         try{
-            const dataDB =  await Book.findAll({ 
-                include:{
-                    model: Category,
-                    attributes: ['name'],
-                    through:{
-                        attributes: []
-                    }
-                }
-            })
-            let response = await dataDB;
-            if(response.length !==0){
-                console.log("entra a ifdataDB")
-                dataDB.map(book => {
-                         return {
-                             id: book.id,
-                             title: book.title,
-                             author: book.author,
-                             state: book.state,
-                             content_short: book.content_short,
-                             publisher_date:book.publisher_date,
-                             image: book.image,
-                             id_api: book.id_api,
-                             categorys: book.categorys?.map(category => category.name),
-                         }
-                     });
-
-            }
-
-            else{
-                 
-                 const resAxios = await axios.get(`${LibrosURL}`);
-               // const { results } = resAxios.data ;
-                 const  results  = resAxios.data
-                 return results ;
-            }
+           
+            const bookDB = await validacionBook(); 
+            let responseBook = await bookDB;
+            return responseBook;
+            
+            
             
         }catch (error) {
           console.error(error, "error");
@@ -74,9 +66,12 @@ router.get('/', async (req, res) => {
 
     }else{
        // para no confundir a home, si no hay un name de busqueda muestra toda la info.
-        const allDate = await getDBInfo() 
+        const allDate = await getDBInfo();
+        
         if (allDate !== 'error'){  
+           
             res.json(allDate);
+            
         }else{
             res.status(404).json({message:'Error en la búsqueda de datos'})
         }
@@ -85,3 +80,80 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router
+
+
+
+
+
+
+
+
+
+
+    // if(responseCategory.length === 0){
+    //     console.log(responseBook,"entra a if de categorys")
+    //     const resCategories = await axios.get(`${CategoriesURL}`);
+    //     const  resultsCategories  = resCategories.data;
+
+    //     console.log(resultsCategories, "categorias estana en 0")
+
+    //     resultsCategories.map(
+        //         async(cate)=>{             
+    //         const createProcessCategories = await Category.create(
+    //                { 
+    //                 name:cate.name,  
+    //                }
+    //         );  
+                
+    //     await createProcessCategories.save();
+    //     console.log(cate.name, 'Name categorie')   
+
+       
+    // });
+    // }
+
+    /////////////////////////////////////////////////////////////////
+    // allDate.map((book)=>{
+
+    //     let bookCreate = await Book.create({ 
+    //         title:book.title,
+    //         author:book.author,
+    //         content_short:book.content_short,
+    //         publisher_date:book.publisher_date,
+    //         id_api:parseInt(book.id_api),
+    //         image:book.image,
+    //         state:false,
+    //     })
+
+    //     let categoryDB = await Diet.findAll({ 
+    //         where: {name: categories}
+    //     })
+
+    //     // console.log(recipeCreate);
+    //     // console.log(dietDB);
+        
+    //     bookCreate.addCategory(categoryDB);
+    // })
+    // try{
+    //     let bookCreate = await Book.create({ 
+    //         name,
+    //         summary,
+    //         score,
+    //         healthScore,
+    //         image,
+    //         steps,
+    //     })
+    
+    //     let categoryDB = await Diet.findAll({ 
+    //         where: {name: categories}
+    //     })
+
+    //     // console.log(recipeCreate);
+    //     // console.log(dietDB);
+    
+    //     bookCreate.addCategory(categoryDB);
+    //     res.send('Succesfull');
+
+    // }catch(error){
+    //     res.status(400).send(error);
+    // }
