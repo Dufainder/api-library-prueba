@@ -154,8 +154,8 @@ const loadBookInDB = async () => {
                  author:book.author,
                  content_short:book.content_short,
                  publisher_date:book.publisher_date,
-                 id_api:parseInt(book.id_api),
-                 image:book.image,
+                 id_api:parseInt(book.ID),
+                 image:book.cover,
                  state:false,
                  
                 })
