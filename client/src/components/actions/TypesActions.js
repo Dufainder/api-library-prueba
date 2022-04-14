@@ -1,4 +1,4 @@
-export const POST_RECIPES = 'POST_RECIPES'
+export const POST_USER = 'POST_USER'
 export const GET_BOOKS = 'GET_BOOKS'
 export const GET_DATABASE = 'GET_DATABASE'
 export const GET_TYPES = 'GET_TYPES'

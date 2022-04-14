@@ -1,8 +1,6 @@
 import axios from 'axios';
-import {GET_BOOKS, GET_TYPES, GET_DATABASE, 
-    GET_STATE_ID, GET_RECIPES_NAME, 
-    FILTER_BY_SEARCHBAR, FILTER_BY_ORDER, 
-    ORDER_BY_SCORE, FILTER_BY_DIETS
+import {GET_BOOKS, POST_USER,
+
 } from './TypesActions.js'
 
 const {REACT_APP_SERVER} = process.env;
@@ -19,6 +17,8 @@ export function loadAll() {
         }
     }
 }
+
+
 export function getBooksAll(){
     return function(dispatch){
              axios.get(`${REACT_APP_SERVER}/books`)
@@ -30,6 +30,23 @@ export function getBooksAll(){
         }).catch((error) => {
             console.log(error)
         })
+    }
+}
+
+export function postUser(payload){
+    console.log(payload)
+    return async function(dispatch) {
+        try {
+            console.log(payload)
+            await axios.post(`${REACT_APP_SERVER}/login`, payload).then((json) => {
+            return dispatch({
+                type: POST_USER,
+                payload: json.data
+            })
+        })
+    }catch(error){
+            console.log(error);
+        }
     }
 }
 

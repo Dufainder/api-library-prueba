@@ -1,7 +1,4 @@
-import {GET_RECIPES, GET_TYPES, 
-    POST_RECIPES, GET_STATE_ID, GET_RECIPES_NAME,  
-    FILTER_BY_SEARCHBAR, FILTER_BY_DIETS, 
-    FILTER_BY_ORDER, ORDER_BY_SCORE
+import {GET_BOOKS, POST_USER
 } from '../actions/TypesActions.js'
 
 const inicialState ={
@@ -15,7 +12,26 @@ const inicialState ={
 export const rootReducer = (state = inicialState, action) => {
          
     switch (action.type) {
-        
+
+        case GET_BOOKS: 
+
+        console.log(action.payload)
+        return {
+            ...state,
+            books: action.payload,
+           
+        }
+
+        case POST_USER: 
+
+        console.log(action.payload)
+        return {
+            ...state,
+            user: action.payload,
+           
+        }
+
+        default: return state;
     }
 
 
