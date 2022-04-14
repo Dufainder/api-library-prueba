@@ -1,10 +1,11 @@
-import './App.css';
+import React from "react";
+import Login from "./components/login/index.jsx";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <>
+      <Login/>
+    </>
   );
 }
 
