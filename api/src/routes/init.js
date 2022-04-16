@@ -152,8 +152,12 @@ const loadBookInDB = async () => {
              let bookCreate = await Book.create({ 
                  title:book.title,
                  author:book.author,
+                 content:book.content,
                  content_short:book.content_short,
+                 publisher:book.publisher,
                  publisher_date:book.publisher_date,
+                 pages:book.pages,
+                 language:book.language,
                  id_api:parseInt(book.ID),
                  image:book.cover,
                  state:false,
