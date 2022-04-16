@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_BOOKS, POST_USER,
+import {GET_BOOKS, POST_USER, GET_DETAIL
 
 } from './TypesActions.js'
 
@@ -50,6 +50,19 @@ export function postUser(payload){
     }
 }
 
+export function getDetailBook(id){
+    return function(dispatch){
+             axios.get(`${REACT_APP_SERVER}/detail/${id}`)
+            .then((json) => {
+            return dispatch({
+                type: GET_DETAIL,
+                payload: json.data
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+}
 
 
 // export function getDatabase() {

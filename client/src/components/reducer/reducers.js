@@ -1,4 +1,4 @@
-import {GET_BOOKS, POST_USER
+import {GET_BOOKS, GET_DETAIL, POST_USER
 } from '../actions/TypesActions.js'
 
 const inicialState ={
@@ -19,6 +19,15 @@ export const rootReducer = (state = inicialState, action) => {
         return {
             ...state,
             books: action.payload,
+           
+        }
+
+        case GET_DETAIL: 
+
+        console.log(action.payload)
+        return {
+            ...state,
+            detail: action.payload,
            
         }
 

@@ -1,6 +1,6 @@
 export const POST_USER = 'POST_USER'
 export const GET_BOOKS = 'GET_BOOKS'
-export const GET_DATABASE = 'GET_DATABASE'
+export const GET_DETAIL = 'GET_DETAIL'
 export const GET_TYPES = 'GET_TYPES'
 export const GET_STATE_ID = 'GET_STATE_ID'
 
