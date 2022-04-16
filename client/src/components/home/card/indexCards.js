@@ -18,7 +18,7 @@ export default function Card(
        <ContainerInfo>
         <h3>{title}</h3>
         <h4>{author}</h4>
-        <p>{content_short}</p>
+        <p dangerouslySetInnerHTML={{ __html: content_short }}></p>
         <span>Publisher date: {publisher_date}</span>
         <span>status: {state? 'Disponible' : 'Prestado'}</span> 
        </ContainerInfo>
