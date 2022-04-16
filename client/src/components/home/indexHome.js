@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { getBooksAll } from '../actions/index';
+import React, {useEffect} from 'react';
+import { getBooksAll} from '../actions/index';
 import { useDispatch, useSelector} from 'react-redux';
 import Navbar from '../navbar/indexNavbar';
 import Card from './card/indexCards';
@@ -9,7 +9,7 @@ import { ContainerCards } from './styledHome';
 function Home() {
 
   const dispatch = useDispatch();
-    const allBooks = useSelector((state) => state.books)
+  const allBooks = useSelector((state) => state.books)
 
     useEffect(() => {
         dispatch(getBooksAll())
@@ -17,6 +17,8 @@ function Home() {
           console.log(allBooks, 'a ver');
         }
       },[])  
+
+   
 
   return (
     <>
@@ -27,6 +29,7 @@ function Home() {
      {allBooks? allBooks.map((e,i)=>(
        i<5?
        <Card 
+     
          key={e.id}
          id={e.id}
          title={e.title} 

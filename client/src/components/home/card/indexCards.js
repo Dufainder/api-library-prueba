@@ -1,16 +1,27 @@
 import React from 'react';
+import { useNavigate }  from 'react-router-dom';
+import { getDetailBook } from '../../actions/index';
 import {Container, ImgBook, SubContainer, ContainerInfo } from './styledCards.jsx'
-
+import { useDispatch} from 'react-redux';
 
 
 export default function Card(
   {title, author, content_short, 
   publisher_date, imagen, id_api, id, state})
  {
-   console.log(imagen)
+  
+  const dispatch = useDispatch();
+  const history = useNavigate();
+
+  const loadDetail = (id) => {  
+   
+    dispatch(getDetailBook(id))
+    history('/detail')
+}
+
   return (
     <>
-    <Container>
+    <Container onClick={()=>loadDetail(id)}>
       <SubContainer>
 
        <ImgBook src={imagen} alt={title}/>
