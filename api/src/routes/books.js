@@ -67,8 +67,9 @@ router.get('/', async (req, res) => {
     }else{
        // para no confundir a home, si no hay un name de busqueda muestra toda la info.
         const allDate = await getDBInfo();
+        let Books = await allDate;
         
-        if (allDate !== 'error'){  
+        if (Books.length !== 0){  
            
             res.json(allDate);
             
