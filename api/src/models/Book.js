@@ -25,9 +25,27 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
     },
 
+    content: {
+      type: DataTypes.TEXT,
+    },
+
     content_short: {
       type: DataTypes.TEXT,
     },
+
+    publisher:{
+      type: DataTypes.STRING,
+    },
+
+    pages:{
+      type: DataTypes.STRING,
+    },
+
+    
+    language:{
+      type: DataTypes.STRING,
+    },
+
 
     publisher_date:{
       type: DataTypes.STRING,
