@@ -5,7 +5,7 @@ const express = require('express');
 const init =  require('./init.js')
 const login = require('./login.js')
 const books = require('./books.js');
-const search = require('./search.js');
+const detail = require('./detail.js');
 
 
 const router = express.Router();
@@ -15,6 +15,6 @@ const router = express.Router();
 router.use('/', init)
 router.use('/login', login);
 router.use('/books', books);
-router.use('/search', search);
+router.use('/detail', detail);
 
 module.exports = router;
