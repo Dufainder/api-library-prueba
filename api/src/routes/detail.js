@@ -10,7 +10,6 @@ const { Book, Category, Op } = require('../db');
 const validacionBook = async(id)=>{
    
     try{
-        console.log(id, 'que es id??')
         const BooksDB = await Book.findByPk(id,{
            
            
@@ -32,10 +31,12 @@ const validacionBook = async(id)=>{
             image: BooksDB.image,
             pages: BooksDB.pages,
             language:BooksDB.language,
+            vailable:BooksDB.vailable,
+            pending:BooksDB.pending,
             publisher_date:BooksDB.publisher_date,
             categories: BooksDB.categories?.map(e => e.name)
         }
-            console.log(obj,'el detalle del objeto')
+       
             return obj
         }else{
             const objerr = {

@@ -21,9 +21,14 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     
-    state: {
+    available: {
       type: DataTypes.BOOLEAN,
     },
+
+
+    pending:{ 
+      type: DataTypes.BOOLEAN,
+     },
 
     content: {
       type: DataTypes.TEXT,
