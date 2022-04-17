@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom'
 
 export const Nav = styled.nav`
   
-  background: #FF8917;
+  background: #DE6757;
   height: 80px;
   width: 100%;
   display: flex;
@@ -25,7 +25,7 @@ export const NavLink = styled(Link)`
       cursor: pointer;
       
       &:hover{
-          background-color: #AD765C;
+          background-color: #FFDABA;;
       }
 `;
 

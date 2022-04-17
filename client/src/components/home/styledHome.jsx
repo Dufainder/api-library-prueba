@@ -11,7 +11,8 @@ margin-top: 3%;
 margin-bottom: 3%;
 border-radius: 20px;
 width: 75%;
-background-color: #D89A08;
+background-color: #FFDABA;
+box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075)inset, 0 0 8px #000;  
 color:black;
 
 `;

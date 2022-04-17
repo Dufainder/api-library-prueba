@@ -1,5 +1,8 @@
 import React from 'react'
-import {  useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import { ContainerDetail, SubContainer,
+      ImgDetail,H2, H4, P,  SpanStatusOn, SpanStatusOff,
+      SpanCat, ContainerCat, SpanInfo, SpanDate  } from './styledDetail';
 
 export default function Detail() {
 
@@ -10,22 +13,41 @@ export default function Detail() {
   return (
     <>
          
-         <h3>{detailBook.title}</h3>
-         <h4>{detailBook.author}</h4>
-         <img src={detailBook.image} alt={detailBook.title}/>
-         <span>{detailBook.state}</span>
-         <p dangerouslySetInnerHTML={{ __html: detailBook.content}}></p>
-         <div>
-             {detailBook.categories?.map((e, i) => {
+         <ContainerDetail>
+          <SubContainer>
 
-                 <span key={i}>{e.name}</span> 
-             }
+           <H2>{detailBook.title}</H2>
+           <H4>Author: {detailBook.author}</H4>
+           <ImgDetail src={detailBook.image} alt={detailBook.title}/>
+           {detailBook.state?
+               <SpanStatusOn>Disponible</SpanStatusOn>
+           :
+               <SpanStatusOff>No Disponible</SpanStatusOff>
+           }
+
+        
+           <P dangerouslySetInnerHTML={{ __html: detailBook.content}}></P>
+           <ContainerCat>
+
+               {detailBook.categories?.map((e, i) => 
+
+                    <SpanCat key={i}>{e} </SpanCat> 
+             
              )}
-         </div>
-         <span>{detailBook.pages}</span>
-         <span>{detailBook.lenguage}</span>
-         <span>{detailBook.publisher}</span>
-         <span>{detailBook.publisher_date}</span>
+             </ContainerCat>
+          
+        <ContainerCat>
+          <SpanInfo>Pages: {detailBook.pages}</SpanInfo>
+          <SpanInfo>language: {detailBook.language}</SpanInfo>
+        </ContainerCat>
+
+        <ContainerCat>
+         <SpanDate>Publisher: {detailBook.publisher}</SpanDate>
+         <SpanDate>Publisher Date: {detailBook.publisher_date}</SpanDate>
+        </ContainerCat>
+
+             </SubContainer>
+         </ContainerDetail>
     </>
   )
 }

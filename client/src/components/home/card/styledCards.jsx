@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 20%;
   border-radius: 15px;
   cursor:pointer;
-  background-color: #DEAF07;
+  background-color: #FAB762;
 
   :hover{
     box-shadow: 0 2px 2px rgba(242, 26, 190,0.1)inset, 0 0 8px #784107;       
