@@ -6,6 +6,7 @@ const init =  require('./init.js')
 const login = require('./login.js')
 const books = require('./books.js');
 const detail = require('./detail.js');
+const lending = require('./lending.js')
 
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.use('/', init)
 router.use('/login', login);
 router.use('/books', books);
 router.use('/detail', detail);
+router.use('/lending', lending);
 
 module.exports = router;

@@ -160,7 +160,8 @@ const loadBookInDB = async () => {
                  language:book.language,
                  id_api:parseInt(book.ID),
                  image:book.cover,
-                 state:false,
+                 available:true,
+                 pending:false,
                  
                 })
                 
