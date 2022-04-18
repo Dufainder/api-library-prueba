@@ -34,8 +34,12 @@ const { Book, Category, User } = sequelize.models;
 
 Book.belongsToMany(Category, {through: 'BookCategory' })
 Category.belongsToMany(Book, {through: 'BookCategory' })
-Book.hasOne(User);
-User.belongsTo(Book);
+
+// User.hasOne(Book);
+// Book.belongsTo(User);
+User.hasMany(Book)
+Book.belongsTo(User);
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);

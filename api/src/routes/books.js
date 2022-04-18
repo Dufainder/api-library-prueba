@@ -2,7 +2,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const express = require('express')
 const router = express.Router()
 require('dotenv').config();
-const { Book, Category, Op } = require('../db');
+const { Book, Category,User, Op } = require('../db');
 
 
 //!                   1
@@ -21,7 +21,10 @@ const validacionBook = async()=>{
                 through:{
                     attributes: []
                 }
-            }
+            },
+            include:{
+                model: User,
+            },
         })
         
         return await dataBookDB;
