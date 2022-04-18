@@ -19,7 +19,7 @@ export default function Detail() {
            <H2>{detailBook.title}</H2>
            <H4>Author: {detailBook.author}</H4>
            <ImgDetail src={detailBook.image} alt={detailBook.title}/>
-           {detailBook.state?
+           {detailBook.available?
                <SpanStatusOn>Disponible</SpanStatusOn>
            :
                <SpanStatusOff>No Disponible</SpanStatusOff>

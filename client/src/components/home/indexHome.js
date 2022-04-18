@@ -38,7 +38,7 @@ function Home() {
          publisher_date={e.publisher_date}
          imagen={e.image}
          id_api={e.id_api}
-         state={e.state}
+         available={e.available}
       >
             
             

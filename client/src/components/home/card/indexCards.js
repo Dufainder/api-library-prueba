@@ -7,7 +7,7 @@ import { useDispatch} from 'react-redux';
 
 export default function Card(
   {title, author, content_short, 
-  publisher_date, imagen, id_api, id, state})
+  publisher_date, imagen, id_api, id, available})
  {
   
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function Card(
         <h4>{author}</h4>
         <p dangerouslySetInnerHTML={{ __html: content_short }}></p>
         <span>Publisher date: {publisher_date}</span>
-        <span>status: {state? 'Disponible' : 'Prestado'}</span> 
+        <span>status: {available? 'Disponible' : 'Prestado'}</span> 
        </ContainerInfo>
       
       </SubContainer>
