@@ -1,8 +1,8 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-const express = require('express')
+const express = require('express');
 const router = express.Router()
 require('dotenv').config();
-const {User, Admin , Op } = require('../db');
+const {User, Admin , Book, Op } = require('../db');
 
 
 const validarAdmin = async(id) =>{
@@ -48,6 +48,9 @@ router.post('/', async (req, res) => {
                    identification:identification,
                    
                 },
+                include:{
+                    model:Book,
+                },
                 defaults:{
                     name:name,
                     last_name:last_name,
@@ -67,6 +70,10 @@ router.post('/', async (req, res) => {
                     identification:identification,
                     
                  },
+                 include:{
+                    model:Book,
+                },
+               
                  defaults:{
                      name:name,
                      last_name:last_name,
