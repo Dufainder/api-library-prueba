@@ -6,15 +6,22 @@ require('dotenv').config();
 const { Book, Category, User, Op } = require('../db');
 
 
-const validacionBook = async(id)=>{
+const validacionBook = async(id, user)=>{
    
     try{
         const dataBookDB =  await Book.findAll({ 
             where:{
                 id:id,
-            }
+            },
+            include:{ 
+                
+                  model:User
+                },
+
         })
         
+
+        console.log()
         return await dataBookDB;
 
      }catch (error) {
@@ -23,12 +30,13 @@ const validacionBook = async(id)=>{
   };
 
 
-  const updataBook = async(id)=>{
+  const updataBook = async(id,userid)=>{
    
     try{
         const dataBookDB =  await Book.update({
            
             available:false,
+            userId: userid,
              
          },
             
@@ -46,20 +54,49 @@ const validacionBook = async(id)=>{
   };
 
 
-router.put('/:id', async (req, res) => {
+  const validateUser = async(id)=>{
+   
+    try{
+        const dataUserDB =  await User.findAll({ 
+            where:{
+                id:id,
+            },
+            include:{
+                model:Book
+            },
+        })
+        
+        return await dataUserDB;
+
+     }catch (error) {
+        console.error(error, "error");
+     }
+  };
+
+
+
+
+router.put('/:iduser/:id', async (req, res) => {
       
     const { id } = req.params;
+    const { iduser } = req.params;
 
     try{
         
+        const userDB = await validateUser(iduser);
+        let upUser = await userDB; 
         
-        const upBooksDB = await updataBook(id);
+        const BooksDB = await validacionBook(id);
+        const upBooksDB = await updataBook(id,iduser);
         let upBook = await upBooksDB; 
 
-        if(upBook.length !== 0){
-            const BooksDB = await validacionBook(id);
+        console.log(iduser, 'el id del usuario')
+
+        if((upBook.length !== 0) & (upUser.length !== 0)){
             let elBook = await BooksDB; 
-            res.send(elBook)
+            console.log(upUser, '<el usuario que debo vincular')
+        
+            await res.send(elBook)
          }
          else{
             res.send('Error al intentar actualizar el libro, pudede que el id este incorrecto') 
